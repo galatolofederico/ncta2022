@@ -1,0 +1,9 @@
+/env
+__pycache__/
+
+/dataset
+/outputs
+/models
+/results
+/plots
+*.zip

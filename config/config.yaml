@@ -1,0 +1,159 @@
+defaults:
+  - _self_
+  - args: common
+  - dataset: prepost
+
+architecture: TransformerRegressor
+
+train:
+  batch_size: 32
+  lr: 1e-3
+  steps: 2500
+  seed: -1
+  gpus: 0
+  wandb: false
+  save_model: ""
+
+validation:
+  batch_size: 32
+  interval: 200
+  batches: 10
+
+log:
+  metrics_each: 100
+
+model:
+  transformer:
+    decoder_dim: 128
+    decoder_depth: 8
+    decoder_heads: 6
+    decoder_dropout: 0
+  lstm:
+    hidden_size: 128 
+    num_layers: 2
+
+evaluate:
+  model: ""
+  split: test
+  output_folder: ${hydra:runtime.cwd}/results
+  batch_size: 32
+  batches: 200
+
+predict:
+  window: 72
+  model: ""
+  split: test
+  output_folder: ${hydra:runtime.cwd}/plots
+  batch_size: 10
+
+wandb:
+  entity: mlpi
+  project: torre-transformer
+  tag: ""
+  
+preprocessing:
+  data:
+    filename: ${hydra:runtime.cwd}/dataset/data.txt
+    separator: ;
+
+  fill_nan_limit: 2
+
+  thresholds:
+    Date time:
+      - 0
+    DEFORMOMETRO INTERNO:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO SU SCALA:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO.1:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO SU SCALA.1:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO SU SCALA.2:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO SU SCALA.3:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO.2:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO.3:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO.4:
+      - -0.5
+      - 0.5
+    TEL. 0 VERT. SUD DIR. N-S:
+      - -2100
+      - 1800
+    TEL. 0 VERT. SUD DIR. E-O:
+      - -2100
+      - 1800
+    DEFORMOMETRO SULLA SCALA:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO INTERNO.1:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO INTERNO.2:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO INTERNO.3:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO INTERNO.4:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO.5:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO.6:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO.7:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO.8:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO.9:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO SULLE SCALE:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO.10:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO INTERNO.5:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO INTERNO.6:
+      - -0.5
+      - 0.5
+    DEFORMOMETRO ESTERNO.11:
+      - -0.5
+      - 0.5
+    Velocita vento istantanea:
+      - 0
+      - 45
+    Direzione vento istantanea:
+      - 0
+      - 360
+    Termometro Aria Piano 8:
+      - -10
+      - 42
+    Irraggiamento Solare:
+      - 0
+      - 1000
+
+  start_date: 1993-08-01 00:00:00
+  end_date: 2006-06-30 00:00:00
